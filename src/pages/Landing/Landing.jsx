@@ -1,59 +1,105 @@
-import {
-  Avatar,
-  Accordion,
-  Select,
-  FileInput,
-  Radio,
-  Label,
-  TextInput,
-} from "flowbite-react";
-import React, { useRef, useEffect, useState, Suspense } from "react";
-import { Link } from "react-router-dom";
-import { BsArrowDown } from "../../assets/icons";
 
-import { leftArrow, logoMain, rightArrow } from "../../assets/images/images";
+import React, { useEffect } from 'react'
+import check_logo from "../../assets/imagesource/check_logo.png";
+import stripe_logo from "../../assets/imagesource/stripe_logo.png";
+
+
+import { Checkbox, Label, Select, TextInput } from "flowbite-react";
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
-  return (
-    <div className="lg:pt-0">
-      {/* <div className="bg-[#f9f9f9] mb-6 border-t border-[#c7c7c7] border-b py-3">
-        <div className="lg:flex justify-center items-center gap-2 text-center px-4 lg:px-0">
-          <img
-            src={logoMain}
-            alt="logoMain"
-            className="w-[32px] inline-block"
-          />
-          <p className="lg:text-[21px] font-semibold">
-            <span className="font-bold">Automate</span> The Creation Of Your
-            Print-On-Demand Products
-          </p>
-        </div>
-      </div> */}
-      <div className="bg-[#f9f9f9] lg:w-8/12 mx-auto p-4 rounded-md border border-[#c7c7c7] mb-10">
-        <div className="lg:flex items-center gap-3">
-          <Select className="lg:w-8/12 mb-2 lg:mb-0">
-            <option>Select Store</option>
-          </Select>
-          {/* <button className="bg-[#1f2937] text-white px-4 py-2 rounded-lg hover:bg-[#374151] lg:w-4/12 text-sm">
-            Load Saved Operation
-          </button> */}
-        </div>
-      </div>
-      <div className="bg-[#f9f9f9] lg:w-8/12 mx-auto p-4 rounded-md border border-[#c7c7c7] mb-8 lg:mb-20">
-        <h2 className="text-base font-semibold pb-4 text-center">
-          Upload File
-        </h2>
-        <FileInput id="file-upload" />
-        <div className="lg:flex items-center mt-4">
-        </div>
-      </div>
-      <div className="mb-10 flex justify-center items-center">
-        <button className="bg-[#1f2937] text-white text-[18px] font-medium px-4 py-2 rounded-lg hover:bg-[#374151] w-full lg:w-4/12">
-          Create My Products!
-        </button>
-      </div>
-    </div>
-  );
-};
 
-export default Landing;
+  return (
+    <div className='pb-[50px]'>
+        <div className='bg-[#00806a] rounded-[30px] px-[30px] lg:px-[70px] pt-[60] pb-[150px]'>
+           <div className='mb-14'>
+              <img src={check_logo} alt='check_logo' className="w-[100px]" />
+           </div>
+           <div className='lg:w-10/12 mx-auto text-center'>
+              <h2 className='text-white text-[30px] lg:text-[40px] leading-[50px] font-semibold mb-4'>Company Name</h2>
+              <p className='text-white text-[16px] leading-[26px] font-normal mb-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in "</p>
+           </div>
+        </div>
+        <div className='bg-[#ffffff] rounded-[30px] px-[30px] lg:px-[70px] pt-[30px] lg:pt-[60] pb-[60px] flex gap-8 lg:w-10/12 mx-auto mt-[-100px]'>
+            <div className='lg:w-8/12 mx-auto form_area'>
+              <div className='mb-4'>
+                <div className="mb-1 block">
+                <Label htmlFor="base">Email Address*</Label>
+                </div>
+                <TextInput id="base" type="email" sizing="md" />
+              </div>
+              <div className='flex gap-4 mb-4'>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">First Name*</Label>
+                        </div>
+                        <TextInput id="base" type="text" sizing="md" />
+                    </div>
+                 </div>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Last Name*</Label>
+                        </div>
+                        <TextInput id="base" type="text" sizing="md" />
+                    </div>
+                 </div>
+              </div>
+              <div className='mb-4'>
+                <div className="mb-1 block">
+                <Label htmlFor="base">Select Country*</Label>
+                </div>
+                <Select id="countries" required>
+                    <option>Select Country</option>
+                    <option>Canada</option>
+                    <option>France</option>
+                    <option>Germany</option>
+                </Select>
+              </div>
+              <div className='flex gap-4 mb-4'>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Select State*</Label>
+                        </div>
+                        <Select id="state" required>
+                            <option>Select State</option>
+                            <option>State</option>
+                            <option>State</option>
+                            <option>State</option>
+                        </Select>
+                    </div>
+                 </div>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Select City*</Label>
+                        </div>
+                        <Select id="state" required>
+                            <option>Select City</option>
+                            <option>City</option>
+                            <option>City</option>
+                            <option>City</option>
+                        </Select>
+                    </div>
+                 </div>
+              </div>
+              <div className='mb-4'>
+                <div className="mb-2 block">
+                  <Label htmlFor="base">Select Payment Type</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                    <Checkbox id="stripe" />
+                    <img src={stripe_logo} alt='stripe_logo' className="w-[60px]" />
+                </div>
+              </div>
+              <button className="w-full bg-[#00806a] text-white font-semibold py-3 rounded-full hover:bg-[#006b57] transition">Place Order</button>
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default Landing

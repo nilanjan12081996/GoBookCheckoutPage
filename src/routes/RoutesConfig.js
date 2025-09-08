@@ -15,8 +15,8 @@ const allRoutes = [
     children: [{ index: true, element: <Login /> }],
   },
   {
-    path: '/home',
-    element: <InsideLayout />,
+    path: '/checkout/:id',
+    element: <OutsideLayout />,
     children: [{ index: true, element: <Landing /> }],
   },
 

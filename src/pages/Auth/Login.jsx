@@ -1,12 +1,17 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import check_logo from "../../assets/imagesource/check_logo.png";
 import stripe_logo from "../../assets/imagesource/stripe_logo.png";
 
 
 import { Checkbox, Label, Select, TextInput } from "flowbite-react";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate=useNavigate()
+  useEffect(()=>{
+navigate("/checkout")
+  },[])
   return (
     <div className='pb-[50px]'>
         <div className='bg-[#00806a] rounded-[30px] px-[30px] lg:px-[70px] pt-[60] pb-[150px]'>
