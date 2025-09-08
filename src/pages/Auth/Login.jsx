@@ -1,123 +1,103 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-import { Checkbox, Label, Select } from "flowbite-react";
-import { logo } from "../../assets/images/images";
-import {
-  getAlluserType,
-  login,
-  loginServiceProvider,
-  wholeSalerLogin,
-} from "../../reducers/AuthSlice";
+import React from 'react'
+import check_logo from "../../assets/imagesource/check_logo.png";
+import stripe_logo from "../../assets/imagesource/stripe_logo.png";
+
+
+import { Checkbox, Label, Select, TextInput } from "flowbite-react";
 
 const Login = () => {
-  const navigate = useNavigate();
-
-  // const handleLogin = () => {
-  //   navigate("/home");
-  // };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const dispatch=useDispatch()
-  const nevigate=useNavigate()
-
-  const onSubmit=(data)=>{
-dispatch(login(data)).then((res)=>{
-  if(res?.payload?.status_code===200){
-nevigate("/home")
-  }
-})
-  }
-
-  const [errorMessage, setErrorMessage] = useState("");
-
   return (
-    <div className="my-0 lg:my-0 px-4 lg:mx-0 flex justify-center items-center wrapper_bg_area h-screen bg-white">
-      <div className="w-full my-0 mx-auto">
-        <div className="lg:flex py-8 lg:py-0">
-          <div className="w-full lg:w-3/12 mx-auto">
-            <div className="w-full">
-              <div className="text-center mb-2 lg:mb-10">
-                <img
-                  src={logo}
-                  alt="logo"
-                  className="inline-block w-full rounded-md"
-                />
-              </div>
-              <h1 className="text-center font-medium text-xl lg:text-[25px] leading-[45px] text-black pb-4 lg:pb-12">
-                Login to Your Account
-              </h1>
-              <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="mb-6">
-                    <Label className="text-[15px] text-black font-normal pb-2 block">
-                      Username
-                    </Label>
-                    <input
-                      type="text"
-                      id="email"
-                      className="bg-white border border-[#dfdfdf] text-[#888888] text-sm rounded-lg focus:ring-[#f1d9ff] focus:border-[#f1d9ff] block w-full py-3 px-3"
-                      placeholder="Username"
-                      {...register("username")}
-                    />
-                  </div>
-                  <div className="mb-6">
-                    <Label className="text-[15px] text-black font-normal pb-2 block">
-                      Your Password
-                    </Label>
-                    <input
-                      placeholder="Password"
-                      type="password"
-                      id="password"
-                      className="bg-white border border-[#dfdfdf] text-[#888888] text-sm rounded-lg focus:ring-[#f1d9ff] focus:border-[#f1d9ff] block w-full py-3 px-3"
-                    {...register("password")}
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="text-white bg-[#343434] font-Manrope font-medium text-[23px] mb-2 hover:bg-[#505050] focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-xl text-xl w-full px-5 py-3 text-center"
-                  >
-                    Log In
-                  </button>
-                  <div className="text-red-500 mb-1 text-center">
-                    {errorMessage}
-                  </div>
-                  <div className="flex justify-between mb-2">
-                    <div className="flex items-center">
-                      <div className="flex items-center gap-1">
-                        <Checkbox />
-                        <Label className="text-[#505050] font-normal text-sm">
-                          Remember me!
-                        </Label>
-                      </div>
-                    </div>
-                    <div className="hidden md:block">
-                      <Link
-                        className="text-black text-sm font-normal hover:text-[#505050]"
-                        to="/forgot-password"
-                      >
-                        Forgot Password?
-                      </Link>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+    <div className='pb-[50px]'>
+        <div className='bg-[#00806a] rounded-[30px] px-[30px] lg:px-[70px] pt-[60] pb-[150px]'>
+           <div className='mb-14'>
+              <img src={check_logo} alt='check_logo' className="w-[100px]" />
+           </div>
+           <div className='lg:w-10/12 mx-auto text-center'>
+              <h2 className='text-white text-[30px] lg:text-[40px] leading-[50px] font-semibold mb-4'>Company Name</h2>
+              <p className='text-white text-[16px] leading-[26px] font-normal mb-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in "</p>
+           </div>
         </div>
-      </div>
+        <div className='bg-[#ffffff] rounded-[30px] px-[30px] lg:px-[70px] pt-[30px] lg:pt-[60] pb-[60px] flex gap-8 lg:w-10/12 mx-auto mt-[-100px]'>
+            <div className='lg:w-8/12 mx-auto form_area'>
+              <div className='mb-4'>
+                <div className="mb-1 block">
+                <Label htmlFor="base">Email Address*</Label>
+                </div>
+                <TextInput id="base" type="email" sizing="md" />
+              </div>
+              <div className='flex gap-4 mb-4'>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">First Name*</Label>
+                        </div>
+                        <TextInput id="base" type="text" sizing="md" />
+                    </div>
+                 </div>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Last Name*</Label>
+                        </div>
+                        <TextInput id="base" type="text" sizing="md" />
+                    </div>
+                 </div>
+              </div>
+              <div className='mb-4'>
+                <div className="mb-1 block">
+                <Label htmlFor="base">Select Country*</Label>
+                </div>
+                <Select id="countries" required>
+                    <option>Select Country</option>
+                    <option>Canada</option>
+                    <option>France</option>
+                    <option>Germany</option>
+                </Select>
+              </div>
+              <div className='flex gap-4 mb-4'>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Select State*</Label>
+                        </div>
+                        <Select id="state" required>
+                            <option>Select State</option>
+                            <option>State</option>
+                            <option>State</option>
+                            <option>State</option>
+                        </Select>
+                    </div>
+                 </div>
+                 <div className='w-6/12'>
+                    <div>
+                        <div className="mb-1 block">
+                        <Label htmlFor="base">Select City*</Label>
+                        </div>
+                        <Select id="state" required>
+                            <option>Select City</option>
+                            <option>City</option>
+                            <option>City</option>
+                            <option>City</option>
+                        </Select>
+                    </div>
+                 </div>
+              </div>
+              <div className='mb-4'>
+                <div className="mb-2 block">
+                  <Label htmlFor="base">Select Payment Type</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                    <Checkbox id="stripe" />
+                    <img src={stripe_logo} alt='stripe_logo' className="w-[60px]" />
+                </div>
+              </div>
+              <button className="w-full bg-[#00806a] text-white font-semibold py-3 rounded-full hover:bg-[#006b57] transition">Place Order</button>
+            </div>
+        </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
