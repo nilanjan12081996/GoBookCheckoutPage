@@ -258,6 +258,24 @@ export const googleSignIn = createAsyncThunk(
 );
 
 
+export const checkoutData = createAsyncThunk(
+  'checkoutData',
+  async ({id}, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/api/transaction-details?id=${id}`);
+      if (response?.data?.status_code === 200) {
+        console.log('response of makepayment', response.data);
+        return response.data;
+      } else {
+        throw Error('Failed to register user');
+      }
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
 
 const initialState = {
   message: null,
@@ -269,7 +287,8 @@ const initialState = {
   usersRole: [],
   refreshTokens: "",
   otpMessage: "",
-  currentWholeSeller: {}
+  currentWholeSeller: {},
+  chkoutData:{}
 };
 
 const authSlice = createSlice({
@@ -551,6 +570,24 @@ const authSlice = createSlice({
       })
 
       .addCase(registerWholeSeller.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+        .addCase(checkoutData.pending, (state) => {
+        state.message = null;
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(checkoutData.fulfilled, (state, { payload }) => {
+
+        state.loading = false;
+        state.chkoutData = payload;
+
+      })
+
+      .addCase(checkoutData.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })
