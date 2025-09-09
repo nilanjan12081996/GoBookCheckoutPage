@@ -1,4 +1,4 @@
-"use client";
+
 import {
   PaymentElement,
   useElements,
@@ -11,15 +11,19 @@ const CheckoutForm = ({
   cSecrateKey,
   sPublishKey,
   errorMessage,
+ serviceId,
+ slot,
+date,
+number,
+transactionId
 }) => {
   const stripe = useStripe();
   const elements = useElements();
-  // const returnUrl = `${process.env.NEXT_FRONT_BASE_URL}/payment-redirect/`;
   const returnUrl = `${
     import.meta.env.VITE_FRONT_BASE_URL
   }/payment-redirect?&sPublishKey=${encodeURIComponent(
     sPublishKey
-  )}&cSecrateKey=${encodeURIComponent(cSecrateKey)}`;
+  )}&cSecrateKey=${encodeURIComponent(cSecrateKey)}&serviceId=${encodeURIComponent(serviceId)}&slot=${encodeURIComponent(slot)}&date=${encodeURIComponent(date)}&number=${encodeURIComponent(number)}&transactionId=${encodeURIComponent(transactionId)}`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

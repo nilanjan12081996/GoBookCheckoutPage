@@ -12,11 +12,23 @@ const Landing = () => {
      const [options, setOptions] = useState(null);
   const [errorMessage, setErrorMessage] = useState();
   const{chkoutData}=useSelector((state)=>state?.auth)
+  const[transactionId,setTransactionId]=useState()
+  const[serviceId,setServiceId]=useState()
+  const[slot,setSlot]=useState()
+  const [date,setDate]=useState()
+  const[number,setNumber]=useState()
   const dispatch=useDispatch()
   const id=useParams()
   console.log("id",id?.id);
   useEffect(()=>{
-dispatch(checkoutData({id:id?.id}))
+  dispatch(checkoutData({id:id?.id})).then((res)=>{
+    console.log("res",res);
+    setTransactionId(res?.payload?.transaction?.[0]?.id)
+    setServiceId(res?.payload?.transaction?.[0]?.service?.id)
+    setDate(res?.payload?.transaction?.[0]?.date)
+    setSlot(res?.payload?.transaction?.[0]?.slot)
+    setNumber(res?.payload?.transaction?.[0]?.customer?.mobile)
+  })
   },[id?.id])
 
 
@@ -121,8 +133,12 @@ dispatch(checkoutData({id:id?.id}))
               setErrorMessage={setErrorMessage}
               cSecrateKey={chkoutData?.clientSecret}
               sPublishKey={chkoutData?.userSpecificStripedata?.[0]?.stripe_key}
-              
               errorMessage={errorMessage}
+              serviceId={serviceId}
+              slot={slot}
+              date={date}
+              number={number}
+              transactionId={transactionId}
             />
 
               </Elements>

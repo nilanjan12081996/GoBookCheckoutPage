@@ -276,6 +276,25 @@ export const checkoutData = createAsyncThunk(
 );
 
 
+export const createBooking = createAsyncThunk(
+  'createBooking',
+  async (user_input, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/api/booking/create-booking`,user_input);
+      if (response?.data?.status_code === 201) {
+      
+        return response.data;
+      } else {
+        throw Error('Failed to register user');
+      }
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
+
 
 const initialState = {
   message: null,
@@ -288,7 +307,8 @@ const initialState = {
   refreshTokens: "",
   otpMessage: "",
   currentWholeSeller: {},
-  chkoutData:{}
+  chkoutData:{},
+  createBookingData:{}
 };
 
 const authSlice = createSlice({
@@ -588,6 +608,24 @@ const authSlice = createSlice({
       })
 
       .addCase(checkoutData.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+
+              .addCase(createBooking.pending, (state) => {
+        state.message = null;
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(createBooking.fulfilled, (state, { payload }) => {
+
+        state.loading = false;
+        state.createBookingData = payload;
+
+      })
+
+      .addCase(createBooking.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })

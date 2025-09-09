@@ -4,6 +4,7 @@ import InsideLayout from '../ui/layout/InsideLayout.jsx';
 
 import Login from '../pages/Auth/Login.jsx';
 import Landing from '../pages/Landing/Landing.jsx';
+import PaymentRedirect from '../pages/Landing/PaymentRedirect.jsx';
 
 
 
@@ -18,6 +19,11 @@ const allRoutes = [
     path: '/checkout/:id',
     element: <OutsideLayout />,
     children: [{ index: true, element: <Landing /> }],
+  },
+    {
+    path: '/payment-redirect',
+    element: <OutsideLayout />,
+    children: [{ index: true, element: <PaymentRedirect /> }],
   },
 
   {
